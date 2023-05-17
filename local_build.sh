@@ -6,16 +6,16 @@ then ./$ENV_SH
 else echo WARNING: \$ENV_BAT is not found\! Global environment is used.
 fi
 
-BUILD_DIR_PREF=build
+BUILD_DIR_PREF=local_build
 TEST_ENABLE=OFF
 
 if [[ $2 = "test" ]]
 then TEST_ENABLE=ON
-     if ! [[ -d bin ]] 
+     if ! [[ -d bin ]]
      then mkdir bin
      fi
      cd bin
-     if ! [[ -d tests ]] 
+     if ! [[ -d tests ]]
      then mkdir tests
      fi
      cd ..
@@ -26,9 +26,9 @@ if [[ $1 = "debug" ]]
 then BUILD_TYPE=debug
 fi
 
-BUILD_DIR="${BUILD_DIR_PREF}_gcc_${BUILD_TYPE}"
+BUILD_DIR="build"
 
-if ! [[ -d $BUILD_DIR ]] 
+if ! [[ -d $BUILD_DIR ]]
 then mkdir $BUILD_DIR
 fi
 cd $BUILD_DIR

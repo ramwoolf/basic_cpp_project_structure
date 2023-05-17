@@ -1,8 +1,13 @@
 message(STATUS "CMake version: ${CMAKE_VERSION}")
-cmake_minimum_required(VERSION 3.0)
+cmake_minimum_required(VERSION 3.15)
 
 set(PROJECT BasicCppProjectTemplate)
-project(${PROJECT})
+project(${PROJECT}
+  LANGUAGES CXX
+  VERSION "1.0.0"
+)
+
+set(CMAKE_VERBOSE_MAKEFILE OFF)
 
 if(NOT CMAKE_BUILD_TYPE)
     set(CMAKE_BUILD_TYPE Debug CACHE STRING "Default build type to Debug" FORCE)
@@ -33,5 +38,8 @@ set(CMAKE_CXX_STANDARD_REQUIRED on)
 
 add_subdirectory(src)
 
-set(INSTALL_NAME_DIR ${CMAKE_CURRENT_SOURCE_DIR}/bin)
-install(TARGETS ${PROJECT} DESTINATION ${INSTALL_NAME_DIR})
+if(ENABLE_TESTS)
+  enable_testing()
+  find_package(gtest REQUIRED)
+  add_subdirectory(test)
+endif()
