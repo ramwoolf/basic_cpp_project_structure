@@ -1,6 +1,6 @@
 #!/usr/bin/bash
 
-ENV_SH=../env.sh
+ENV_SH=env.sh
 if [[ -f $ENV_SH && -x $ENV_SH ]]
 then ./$ENV_SH
 else echo WARNING: \$ENV_BAT is not found\! Global environment is used.
