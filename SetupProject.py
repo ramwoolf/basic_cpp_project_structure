@@ -1,10 +1,15 @@
 #!/bin/python
 
 import argparse
+import os
+import sys
 
 def main(args):
+    root_dir = sys.argv[0]
     print("Run with:")
     print(args)
+    print(root_dir)
+
 
 if __name__ == '__main__':
     arg_parser = argparse.ArgumentParser(description="Setup base CPP projest structure")
