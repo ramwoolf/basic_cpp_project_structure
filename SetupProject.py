@@ -5,14 +5,19 @@ import os
 import sys
 
 def main(args):
-    root_dir = sys.argv[0]
+    root_dir = os.path.dirname(sys.argv[0])
     print("Run with:")
     print(args)
     print(root_dir)
+    project_name = args.project_name
+    print(project_name)
 
 
 if __name__ == '__main__':
     arg_parser = argparse.ArgumentParser(description="Setup base CPP projest structure")
+
+    arg_parser.add_argument("project_name")
+
     arg_parser.add_argument(
         "--std",
         type=str,
@@ -25,7 +30,7 @@ if __name__ == '__main__':
         "--type",
         type=str,
         default="exec",
-        choices=["exec", "shared", "static", "header"],
+        choices=["exec", "shared", "static", "header-only"],
         help="Type of project"
     )
 
