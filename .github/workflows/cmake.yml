@@ -12,14 +12,27 @@ env:
 
 jobs:
   build-and-test:
-    runs-on: ubuntu-latest
+    runs-on: ${ { matrix.config.os } }
+    strategy:
+      fail-fast: false
+      matrix:
+        config:
+        - {
+            name: "Ubuntu Latest GCC", artifact: "Linux.tar.xz",
+            os: ubuntu-latest,
+            build_type: "Release", cc: "gcc", cxx: "g++"
+          }
 
     steps:
     - name: Checkout code
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
 
     - name: Set up CMake
-      uses: lukka/get-cmake@v3
+      uses: lukka/get-cmake@latest
+      with:
+        useLocalCache: true
+        useCloudCache: false
+
 
     - name: Install dependencies
       run: sudo apt-get install -y libgtest-dev cmake
